@@ -119,7 +119,7 @@ public class InGameOverlayHelper {
         Alignment alignment = ClientConfig.hotbarAlignment.get();
         while (totalSlots < slots) {
             int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
-            int left = alignment == Alignment.LEFT ? hotbarStart : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow));
+            int left = alignment == Alignment.LEFT ? hotbarStart - 10 * (9 - slots) : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + 10 * (9 - slots));
             int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
             renderHotbarRow(guiGraphics, totalSlots, slotsInRow, left, top);
             totalSlots += slotsInRow;
@@ -154,7 +154,7 @@ public class InGameOverlayHelper {
         Order order = ClientConfig.hotbarRowOrder.get();
         while (totalSlots < slots) {
             int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
-            int left = alignment == Alignment.LEFT ? hotbarStart : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow));
+            int left = alignment == Alignment.LEFT ? hotbarStart - 10 * (9 - slots) : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + 10 * (9 - slots));
             int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
             l += renderHotbarItemsRow(guiGraphics, order == Order.NORMAL ? totalSlots : slots - totalSlots - slotsInRow, slotsInRow, left, top, partialTicks, player);
             totalSlots += slotsInRow;
@@ -170,7 +170,7 @@ public class InGameOverlayHelper {
             int k1 = top + 3;
             int normalized = SlotUtils.normalizeSlotId(from + slot);
             if(normalized == player.getInventory().selected){
-                guiGraphics.blit(Textures.WIDGETS_LOCATION, j1 - 4, k1 - 4, 0, 22, 24, 23);
+                guiGraphics.blit(Textures.WIDGETS_LOCATION, j1 - 4, k1 - 4, 0, 22, 24, 24);
             }
             renderSlot(guiGraphics, j1, k1, partialTicks, player, player.getInventory().items.get(normalized), l++);
         }
