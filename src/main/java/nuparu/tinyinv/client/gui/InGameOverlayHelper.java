@@ -117,9 +117,11 @@ public class InGameOverlayHelper {
         int totalSlots = 0;
         int row = 1;
         Alignment alignment = ClientConfig.hotbarAlignment.get();
+        int numberOfRows = (int) Math.ceil((double) slots / slotsPerRow);
+        int check = (numberOfRows >= 2) ? 0 : 10 * (9 - slots);
         while (totalSlots < slots) {
             int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
-            int left = alignment == Alignment.LEFT ? hotbarStart - 10 * (9 - slots) : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + 10 * (9 - slots));
+            int left = alignment == Alignment.LEFT ? hotbarStart - check : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + check);
             int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
             renderHotbarRow(guiGraphics, totalSlots, slotsInRow, left, top);
             totalSlots += slotsInRow;
@@ -152,9 +154,11 @@ public class InGameOverlayHelper {
         int row = 1;
         Alignment alignment = ClientConfig.hotbarAlignment.get();
         Order order = ClientConfig.hotbarRowOrder.get();
+        int numberOfRows = (int) Math.ceil((double) slots / slotsPerRow);
+        int check = (numberOfRows >= 2) ? 0 : 10 * (9 - slots);
         while (totalSlots < slots) {
             int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
-            int left = alignment == Alignment.LEFT ? hotbarStart - 10 * (9 - slots) : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + 10 * (9 - slots));
+            int left = alignment == Alignment.LEFT ? hotbarStart - check : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow) + check);
             int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
             l += renderHotbarItemsRow(guiGraphics, order == Order.NORMAL ? totalSlots : slots - totalSlots - slotsInRow, slotsInRow, left, top, partialTicks, player);
             totalSlots += slotsInRow;
